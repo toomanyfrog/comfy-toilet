@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class NpcController : EventAbstractClass
 {
-    
-   
 
-    
+
+
+    [SerializeField] bool blocked = false;
     // Start is called before the first frame update
     void Start()
     {
-        state = EventState.idle;
+        state = EventState.active;
         Speed = 0.03f;
         CountDownTime = 3f;
     }
@@ -36,12 +36,30 @@ public class NpcController : EventAbstractClass
 
         
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("DoorTrigger"))
+        {
+            Debug.Log("Door Trigger!");
+            blocked = true;
+        }
+    }
     protected override void EventActive()
     {
-        transform.Translate(new Vector3(0f,0f,Speed));
+        if (!blocked)
+        {
+            transform.Translate(new Vector3(0f, 0f, Speed));
+        }
+        else
+        {
+            LevelManager.Instance.PoopLevelUp();
+        }
+        
     }
     protected override void MoveBack()
     {
+        blocked = false;
         transform.Translate(new Vector3(0f, 0f, -Speed));
         CountDownTime -= Time.deltaTime;
         if (CountDownTime < 0)

@@ -14,6 +14,7 @@ public class PooBarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PooLevelFill.transform.localScale.Set( 1.0f, LevelManager.Instance.PoopLevel / 100f,1.0f);
+        Debug.Log(LevelManager.Instance.PoopLevel / 100.0f);
+        PooLevelFill.transform.localScale = new Vector3( 1.0f, LevelManager.Instance.PoopLevel / 100.0f,1.0f);
     }
 }

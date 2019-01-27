@@ -13,6 +13,6 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        gameObject.GetComponent<Animator>().speed = (1 + LevelManager.Instance.PoopLevel / 100);
     }
 }

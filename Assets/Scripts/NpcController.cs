@@ -8,6 +8,7 @@ public class NpcController : EventAbstractClass
 
 
     [SerializeField] bool blocked = false;
+    [SerializeField] bool Inverted = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +44,7 @@ public class NpcController : EventAbstractClass
         {
             Debug.Log("Door Trigger!");
             blocked = true;
+            gameObject.GetComponent<Animator>().SetBool("TryOpen", true);
         }
     }
     protected override void EventActive()
@@ -59,14 +61,22 @@ public class NpcController : EventAbstractClass
     }
     protected override void MoveBack()
     {
+        if (!Inverted)
+        {
+            gameObject.transform.RotateAround(gameObject.transform.position,gameObject.transform.up,180f);
+            Inverted = true;
+        }
+        gameObject.GetComponent<Animator>().SetBool("TryOpen", false);
         blocked = false;
-        transform.Translate(new Vector3(0f, 0f, -Speed));
+        transform.Translate(new Vector3(0f, 0f, Speed));
         CountDownTime -= Time.deltaTime;
         if (CountDownTime < 0)
         {
             Debug.Log("Go to toilet");
             state = EventState.active;
             CountDownTime = 3f;
+            gameObject.transform.RotateAround(gameObject.transform.position, gameObject.transform.up, 180f);
+            Inverted = false;
         }
     }
 }

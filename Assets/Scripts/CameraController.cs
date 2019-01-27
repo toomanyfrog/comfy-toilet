@@ -12,6 +12,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] float moveDuration = 2f;
     float timeCount = 0;
     [SerializeField] bool isMoving = false;
+    [SerializeField] Color backgroundColor;
 
 
     // Start is called before the first frame update
@@ -48,6 +49,7 @@ public class CameraController : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, finalPos.position, timeCount / moveDuration);
             transform.rotation = Quaternion.Slerp(transform.rotation, finalPos.rotation, timeCount / moveDuration);
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, finalFOV, timeCount / moveDuration);
+            cam.backgroundColor = Color.Lerp(cam.backgroundColor, backgroundColor, timeCount / moveDuration);
             timeCount += Time.deltaTime;
             yield return null;
         }

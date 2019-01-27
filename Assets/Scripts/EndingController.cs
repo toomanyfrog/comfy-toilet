@@ -14,6 +14,7 @@ public class EndingController : MonoBehaviour
     [SerializeField] Transform directional2;
     [SerializeField] Transform finalDir2;
     [SerializeField] float finalIntensity1 = 1.68f;
+    [SerializeField] GameObject leaf;
     float timeCount = 0;
     bool isMoving = false;
 
@@ -41,6 +42,8 @@ public class EndingController : MonoBehaviour
         {
             StartCoroutine(MoveCoroutine());
             StartCoroutine(LightCoroutine());
+            leaf.SetActive(true);
+            leaf.GetComponent<Animator>().SetBool("LeafEnter", true);
             isMoving = true;
         }
     }

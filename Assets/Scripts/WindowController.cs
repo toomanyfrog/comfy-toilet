@@ -15,13 +15,12 @@ public class WindowController : EventAbstractClass
     {
         switch (state)
         {
+            case EventState.idle:
+                break;
             case EventState.active:
                 EventActive();
                 break;
-            case EventState.ending:
-                MoveBack();
 
-                break;
 
         }
 
@@ -46,7 +45,7 @@ public class WindowController : EventAbstractClass
         
     }
 
-    protected override void MoveBack()
+    public override void CompleteEvent()
     {
         if (transform.rotation.eulerAngles.y > 0f)
         {

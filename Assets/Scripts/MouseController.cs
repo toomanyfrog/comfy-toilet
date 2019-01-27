@@ -25,7 +25,9 @@ public class MouseController : MonoBehaviour
                     Debug.Log(hit.transform.gameObject.GetComponent<EventAbstractClass>().GetType().Name);
                     if (hit.transform.gameObject.GetComponent<EventAbstractClass>().state == EventAbstractClass.EventState.active)
                     {
-                        hit.transform.gameObject.GetComponent<EventAbstractClass>().state = EventAbstractClass.EventState.ending;
+
+                        //active method
+                        hit.transform.gameObject.GetComponent<EventAbstractClass>().CompleteEvent();
                         Debug.Log("You selected the " + hit.transform.name); // ensure you picked right object
                     }
                    

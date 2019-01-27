@@ -12,6 +12,7 @@ public abstract class EventAbstractClass : MonoBehaviour
         idle,
         active,
         ending
+        
     }
     public EventState state;
     // Start is called before the first frame update
@@ -28,15 +29,22 @@ public abstract class EventAbstractClass : MonoBehaviour
 
     public void CountDown()
     {
-       
-        
+        CountDownTime -= Time.deltaTime;
+        if (CountDownTime < 0)
+        {
+            
+            state = EventState.active;
+            CountDownTime = 3f;
+
+        }
+
     }
 
     protected virtual void EventActive()
     {
         
     }
-    protected virtual void MoveBack()
+    public virtual void CompleteEvent()
     {
         
     }

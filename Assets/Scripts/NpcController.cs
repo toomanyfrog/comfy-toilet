@@ -22,12 +22,23 @@ public class NpcController : EventAbstractClass
     {
         switch (state)
         {
+            case EventState.idle:
+                CountDown();
+                
+                break;
             case EventState.active:
+                if (Inverted)
+                {
+                    gameObject.transform.RotateAround(gameObject.transform.position, gameObject.transform.up, 180f);
+                    Inverted = false;
+                }
+                
+
                 EventActive();
                 break;
+
             case EventState.ending:
-                MoveBack();
-               
+                CompleteEvent();
                 break;
               
         }
@@ -59,24 +70,36 @@ public class NpcController : EventAbstractClass
         }
         
     }
-    protected override void MoveBack()
+    public override void CompleteEvent()
     {
+        if(state != EventState.ending)
+        {
+            gameObject.GetComponent<Animator>().SetBool("TryOpen", false);
+            blocked = false;
+            state = EventState.ending;
+        }
+        
         if (!Inverted)
         {
             gameObject.transform.RotateAround(gameObject.transform.position,gameObject.transform.up,180f);
             Inverted = true;
         }
-        gameObject.GetComponent<Animator>().SetBool("TryOpen", false);
-        blocked = false;
-        transform.Translate(new Vector3(0f, 0f, Speed));
-        CountDownTime -= Time.deltaTime;
-        if (CountDownTime < 0)
+
+
+
+        if(gameObject.transform.position.x < 28.0f)
         {
-            Debug.Log("Go to toilet");
-            state = EventState.active;
-            CountDownTime = 3f;
-            gameObject.transform.RotateAround(gameObject.transform.position, gameObject.transform.up, 180f);
-            Inverted = false;
+            
+            transform.Translate(new Vector3(0f, 0f, Speed));
         }
+        else
+        {
+            state = EventState.idle;
+        }
+       
+
+
+            
     }
+    
 }

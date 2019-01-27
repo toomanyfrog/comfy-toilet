@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
     public float PoopLevel = 0;
     public GameObject LoseUI;
+    public bool failed = false;
 
     [SerializeField] float PoopLevelUpSpeed =0.1f;
 
@@ -60,7 +61,12 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            LoseUI.GetComponent<Animator>().SetBool("GameOver", true);
+            if (State == LevelState.GameProgress)
+            {
+                LoseUI.SetActive(true);
+                LoseUI.GetComponent<Animator>().SetBool("GameOver", true);
+                failed = true;
+            }
             State = LevelState.GameEnd;
         }
     }

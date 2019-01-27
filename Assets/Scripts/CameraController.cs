@@ -34,6 +34,7 @@ public class CameraController : MonoBehaviour
     {
         if (!isMoving)
         {
+            if (LevelManager.Instance.failed) backgroundColor = Color.black;
             StartCoroutine(ZoomCoroutine());
             isMoving = true;
         }

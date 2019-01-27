@@ -40,10 +40,17 @@ public class EndingController : MonoBehaviour
     {
         if (!isMoving)
         {
-            StartCoroutine(MoveCoroutine());
-            StartCoroutine(LightCoroutine());
-            leaf.SetActive(true);
-            leaf.GetComponent<Animator>().SetBool("LeafEnter", true);
+            if (LevelManager.Instance.failed)
+            {
+                StartCoroutine(FailCoroutine());
+            }
+            else
+            {
+                StartCoroutine(MoveCoroutine());
+                StartCoroutine(LightCoroutine());
+                leaf.SetActive(true);
+                leaf.GetComponent<Animator>().SetBool("LeafEnter", true);
+            }
             isMoving = true;
         }
     }
@@ -74,6 +81,18 @@ public class EndingController : MonoBehaviour
             directional2.rotation = Quaternion.Slerp(directional2.rotation, finalDir2.rotation, timeCount / moveDuration);
             l.intensity = Mathf.Lerp(l.intensity, finalIntensity1, timeCount / moveDuration);
             l.color = Color.Lerp(l.color, finalDir1.gameObject.GetComponent<Light>().color, timeCount / moveDuration);
+            timeCount += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    IEnumerator FailCoroutine()
+    {
+        Light l = directional1.GetComponent<Light>();
+        while (timeCount/moveDuration > 0.2f)
+        {
+            //l.intensity = Mathf.Lerp(l.intensity, 0.1f, timeCount / moveDuration);
+            l.color = Color.Lerp(l.color, Color.red, timeCount / moveDuration);
             timeCount += Time.deltaTime;
             yield return null;
         }

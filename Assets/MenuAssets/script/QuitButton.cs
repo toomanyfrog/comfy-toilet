@@ -1,31 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-
-public class MenuScript : MonoBehaviour
+public class QuitButton : MonoBehaviour
 {
-    [SerializeField] Image credits;
-    
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
-
-    public void LoadByIndex(int sceneIndex)
-    {
-        SceneManager.LoadScene(sceneIndex);
-    }
-
 
     public void Quit()
     {
@@ -36,13 +25,8 @@ public class MenuScript : MonoBehaviour
         #endif
     }
 
-    public void OpenCredits()
+    private void OnMouseDown()
     {
-        credits.gameObject.SetActive(true);
+        Quit();
     }
-    public void CloseCredits()
-    {
-        credits.gameObject.SetActive(false);
-    }
- 
 }

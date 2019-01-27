@@ -25,7 +25,7 @@ public class CharacterController : MonoBehaviour
         }
         else if(LevelManager.Instance.PoopLevel < 100.0f && LevelManager.Instance.State == LevelManager.LevelState.GameEnd)
         {
-            gameObject.GetComponent<Animator>().speed = 3;
+            gameObject.GetComponent<Animator>().speed = 1.5f;
             gameObject.GetComponent<Animator>().SetBool("Win", true);
         }
     }

@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class WindowController : EventAbstractClass
 {
+
+    Animator anim;
+    bool isOpen = true;
+
     // Start is called before the first frame update
     void Start()
     {
-        Speed =1f;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -16,45 +20,33 @@ public class WindowController : EventAbstractClass
         switch (state)
         {
             case EventState.idle:
+                CountDown();
                 break;
             case EventState.active:
                 EventActive();
                 break;
-
-
         }
-
-
-
-
-
     }
 
     protected override void EventActive()
     {
-        if (transform.rotation.eulerAngles.y < 90f)
+        if (isOpen)
         {
-            Debug.Log(transform.rotation.eulerAngles.y);
-            transform.Rotate(transform.up, Speed);
+            anim.SetTrigger("CloseWindow");
+            isOpen = false;
         }
         else
         {
             LevelManager.Instance.PoopLevelUp();
-        }
-        
-        
+        }       
     }
 
     public override void CompleteEvent()
     {
-        if (transform.rotation.eulerAngles.y > 0f)
+        if (!isOpen)
         {
-            transform.Rotate(transform.up, -Speed);
-            
-        }
-        else
-        {
-          
+            anim.SetTrigger("OpenWindow");
+            isOpen = true;
             state = EventState.idle;
         }
     }

@@ -13,7 +13,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] float PoopLevelUpSpeed =0.1f;
     [SerializeField] int numSecondsCountdown = 3;
     [SerializeField] GameObject countUI;
+    [SerializeField] Transform timeUI;
 
+    float GameTimeOrg = 10.0f;
     public float GameTime = 10.0f;
     int count = 0;
     
@@ -30,6 +32,7 @@ public class LevelManager : MonoBehaviour
     }
     void Start()
     {
+        GameTimeOrg = GameTime;
         State = LevelState.GameStart;
         StartCoroutine(StartGame());
     }
@@ -43,6 +46,7 @@ public class LevelManager : MonoBehaviour
             if (GameTime > 0)
             {
                 GameTime -= Time.deltaTime;
+                timeUI.localScale = new Vector3((GameTimeOrg-GameTime)/GameTimeOrg, timeUI.localScale.y, timeUI.localScale.z);
             }
             else
             {

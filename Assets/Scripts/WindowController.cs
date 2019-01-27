@@ -35,7 +35,7 @@ public class WindowController : EventAbstractClass
             anim.SetTrigger("CloseWindow");
             isOpen = false;
         }
-        else
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Close"))
         {
             LevelManager.Instance.PoopLevelUp();
         }       

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class EventAbstractClass : MonoBehaviour
 {
-    [SerializeField] public float CountDownTime;
+    [SerializeField] public float CountDownTimeOrg;
     [SerializeField] public float Speed;
-
+    [SerializeField] public float CountDownTime;
     public enum EventState
     {
         idle,
@@ -34,7 +34,7 @@ public abstract class EventAbstractClass : MonoBehaviour
         {
             
             state = EventState.active;
-            CountDownTime = 3f;
+            CountDownTime = CountDownTimeOrg;
 
         }
 

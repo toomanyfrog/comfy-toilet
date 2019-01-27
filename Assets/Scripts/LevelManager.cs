@@ -51,7 +51,7 @@ public class LevelManager : MonoBehaviour
 
     public void PoopLevelUp()
     {
-        if(PoopLevel < 100)
+        if(PoopLevel < 100 && State == LevelState.GameProgress)
         {
             PoopLevel += PoopLevelUpSpeed;
             Debug.Log("Poop Level: "+ PoopLevel);

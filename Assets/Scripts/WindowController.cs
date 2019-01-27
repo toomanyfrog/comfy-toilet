@@ -7,11 +7,13 @@ public class WindowController : EventAbstractClass
 
     Animator anim;
     bool isOpen = true;
+    public GameObject Smell;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        Smell.SetActive(false);
     }
 
     // Update is called once per frame
@@ -38,6 +40,8 @@ public class WindowController : EventAbstractClass
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Close"))
         {
             LevelManager.Instance.PoopLevelUp();
+            Smell.SetActive(true);
+
         }       
     }
 
@@ -48,6 +52,7 @@ public class WindowController : EventAbstractClass
             anim.SetTrigger("OpenWindow");
             isOpen = true;
             state = EventState.idle;
+            Smell.SetActive(false);
         }
     }
 }

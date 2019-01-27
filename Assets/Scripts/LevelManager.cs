@@ -8,10 +8,14 @@ public class LevelManager : MonoBehaviour
     public float PoopLevel = 0;
     public GameObject LoseUI;
     public bool failed = false;
+   
 
     [SerializeField] float PoopLevelUpSpeed =0.1f;
+    [SerializeField] int numSecondsCountdown = 3;
+    [SerializeField] GameObject countUI;
 
     public float GameTime = 10.0f;
+    int count = 0;
     
     public enum LevelState {
         GameStart,
@@ -26,10 +30,10 @@ public class LevelManager : MonoBehaviour
     }
     void Start()
     {
-        //State = LevelState.GameStart;
-
-        State = LevelState.GameProgress;
+        State = LevelState.GameStart;
+        StartCoroutine(StartGame());
     }
+
 
     // Update is called once per frame
     private void FixedUpdate()
@@ -47,8 +51,6 @@ public class LevelManager : MonoBehaviour
                 State = LevelState.GameEnd;
             }
         }
-
-
     }
 
 
@@ -71,4 +73,17 @@ public class LevelManager : MonoBehaviour
         }
     }
    
+    IEnumerator StartGame()
+    {        
+        countUI.SetActive(true);
+        while (count < numSecondsCountdown)
+        {
+            count++;
+            countUI.transform.position -= new Vector3(0, 15, 0);
+            yield return new WaitForSeconds(1);
+
+        }
+        countUI.SetActive(false);
+        State = LevelState.GameProgress;
+    }
 }

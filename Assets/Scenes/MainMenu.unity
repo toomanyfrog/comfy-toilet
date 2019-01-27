@@ -1391,7 +1391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: 753de0a5ee0af7843ae1b2b86a4f006b, type: 2}
+  profile: {fileID: 11400000, guid: 90664d0884a48154d93a8505f37e7f4c, type: 2}
 --- !u!1 &1334605566 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 78deff63f9dbfec448a9e29f5da41fd0,

@@ -12,7 +12,7 @@ public class NpcController : EventAbstractClass
     // Start is called before the first frame update
     void Start()
     {
-        state = EventState.active;
+        state = EventState.idle;
         Speed = 0.03f;
         CountDownTime = 3f;
     }

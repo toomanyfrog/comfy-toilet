@@ -16,13 +16,15 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         cam = GetComponent<Camera>();
-        StartMoving();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (LevelManager.Instance.State == LevelManager.LevelState.GameEnd)
+        {
+            StartMoving();
+        }
     }
 
     public void StartMoving()

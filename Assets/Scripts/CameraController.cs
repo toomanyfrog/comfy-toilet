@@ -7,10 +7,12 @@ public class CameraController : MonoBehaviour
 
     Camera cam;
     [SerializeField] Transform finalPos;
+    [SerializeField] float delay = 4f;
     [SerializeField] float finalFOV = 83f;
     [SerializeField] float moveDuration = 2f;
     float timeCount = 0;
     [SerializeField] bool isMoving = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,7 @@ public class CameraController : MonoBehaviour
 
     IEnumerator ZoomCoroutine()
     {
+        yield return new WaitForSeconds(delay);
         float angleDiff = Quaternion.Angle(transform.rotation, finalPos.rotation);
         float distance = Vector3.Distance(transform.position, finalPos.position);
         while (distance > 1f || angleDiff > 10)

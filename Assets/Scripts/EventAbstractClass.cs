@@ -48,4 +48,14 @@ public abstract class EventAbstractClass : MonoBehaviour
     {
         
     }
+
+    public void SpeedUp()
+    {
+        if(Speed <= 0.5f)
+        {
+            gameObject.GetComponent<Animator>().speed = 1 + 3 * (60.0f - LevelManager.Instance.GameTime) / 60.0f;
+            Speed += 0.001f * (60.0f - LevelManager.Instance.GameTime) / 60.0f;
+        }
+    }
+        
 }

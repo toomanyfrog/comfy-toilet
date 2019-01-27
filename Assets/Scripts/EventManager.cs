@@ -8,7 +8,7 @@ public class EventManager : MonoBehaviour
     [SerializeField] float TimeInterval_NPC = 5f;
     [SerializeField] float TimeInterval_Battery = 27f;
 
-    public GameObject[] NPC;
+    
     public GameObject Window;
     private bool CoroutineStopped = false;
     [SerializeField] Vector3 NPC_SpawnPos;
@@ -23,7 +23,7 @@ public class EventManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(TriggerNPC());
+        
         StartCoroutine(TriggerWindow());
     }
 
@@ -39,7 +39,7 @@ public class EventManager : MonoBehaviour
         }
         
     }
-    private IEnumerator TriggerNPC()
+    /*private IEnumerator TriggerNPC()
     {
         while(true)
         {
@@ -48,7 +48,7 @@ public class EventManager : MonoBehaviour
             temp.GetComponent<EventAbstractClass>().state = EventAbstractClass.EventState.active;
         }
        
-    }
+    }*/
 
     private IEnumerator TriggerWindow()
     {

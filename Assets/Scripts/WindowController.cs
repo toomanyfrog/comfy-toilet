@@ -8,11 +8,13 @@ public class WindowController : EventAbstractClass
     Animator anim;
     bool isOpen = true;
     public GameObject Smell;
+    public Animator dog;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+
         Smell.SetActive(false);
     }
 
@@ -35,6 +37,7 @@ public class WindowController : EventAbstractClass
         if (isOpen)
         {
             anim.SetTrigger("CloseWindow");
+            dog.SetBool("InWindow", false);
             isOpen = false;
         }
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Close"))
@@ -50,6 +53,7 @@ public class WindowController : EventAbstractClass
         if (!isOpen)
         {
             anim.SetTrigger("OpenWindow");
+            dog.SetBool("InWindow", true);
             isOpen = true;
             state = EventState.idle;
             Smell.SetActive(false);

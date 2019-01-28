@@ -18,6 +18,11 @@ public class CreditButton : MonoBehaviour
         
     }
 
+    private void OnMouseDown()
+    {
+        OpenCredits();
+    }
+
     public void OpenCredits()
     {
         credits.SetActive(true);

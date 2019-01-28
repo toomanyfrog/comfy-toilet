@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     public float PoopLevel = 0;
     public GameObject LoseUI;
     public bool failed = false;
+    public AudioClip[] bgm;
    
 
     [SerializeField] float PoopLevelUpSpeed =0.1f;
@@ -29,12 +30,15 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        gameObject.GetComponent<AudioSource>().Play();
     }
     void Start()
     {
         GameTimeOrg = GameTime;
         State = LevelState.GameStart;
         StartCoroutine(StartGame());
+        
     }
 
 
@@ -53,7 +57,10 @@ public class LevelManager : MonoBehaviour
 
                 Debug.Log("Game Over");
                 State = LevelState.GameEnd;
+                gameObject.GetComponent<AudioSource>().clip = bgm[1];
+                gameObject.GetComponent<AudioSource>().Play();
             }
+
         }
     }
 
@@ -72,6 +79,7 @@ public class LevelManager : MonoBehaviour
                 LoseUI.SetActive(true);
                 LoseUI.GetComponent<Animator>().SetBool("GameOver", true);
                 failed = true;
+
             }
             State = LevelState.GameEnd;
         }

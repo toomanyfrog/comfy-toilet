@@ -89,7 +89,7 @@ public class NpcController : EventAbstractClass
 
 
 
-        if(gameObject.transform.position.x < 28.0f)
+        if(gameObject.transform.position.x < 32.0f)
         {
             
             transform.Translate(new Vector3(0f, 0f, Speed));
